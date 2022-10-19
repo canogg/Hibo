@@ -9,21 +9,64 @@ import UIKit
 
 class FirstViewController: UIViewController {
 
+    lazy var screen: FirstView = FirstView(frame: UIScreen.main.bounds)
+
+    let viewModel: FirstViewModel = FirstViewModel()
+
+    override func loadView() {
+        super.loadView()
+
+        self.view = self.screen
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.screen.collectionView.delegate = self
+        self.screen.collectionView.dataSource = self
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func gpNextPage(title: String) {
+        self.navigationController?.pushViewController(SecondViewController(), animated: true)
     }
-    */
+}
+
+extension FirstViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "cell",
+            for: indexPath) as? CustomCell else {
+            return UICollectionViewCell()
+        }
+
+        cell.layer.cornerRadius = 25
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.gray.cgColor
+        cell.clipsToBounds = true
+
+        let model = viewModel.getChoice(for: indexPath)
+        cell.config(model: model)
+
+        cell.didTapNextPage = {
+            let model = self.viewModel.getChoice(for: indexPath)
+            self.gpNextPage(title: model.title)
+        }
+
+        return cell
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath) -> CGSize {
+            return CGSize(width: collectionView.frame.width/2.3, height: collectionView.frame.width/1.5)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.getChoicesCount()
+    }
 
 }

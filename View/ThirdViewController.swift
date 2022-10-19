@@ -8,22 +8,23 @@
 import UIKit
 
 class ThirdViewController: UIViewController {
+    lazy var screen: ThirdView = ThirdView(frame: UIScreen.main.bounds)
+    let viewModel: SecondViewModel = SecondViewModel()
 
+    // custom init uiviewcontroller
+
+    override func loadView() {
+        super.loadView()
+        self.view = self.screen
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        screen.didTapNextPage = { [weak self] in
+            self?.gpNextPage(title: "Teu titulo aqui")
+        }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func gpNextPage(title: String) {
+        let thirdViewController = ThirdViewController()
+        self.navigationController?.pushViewController(ThirdViewController(), animated: true)
     }
-    */
-
 }
