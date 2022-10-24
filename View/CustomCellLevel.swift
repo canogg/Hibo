@@ -7,21 +7,21 @@
 
 import UIKit
 
-class CustomCellSecond: UICollectionViewCell {
-
+class CustomCellLevel: UICollectionViewCell {
+    
     var didTapNextPage: (() -> Void)?
-
+    
     fileprivate let cardimage : UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFill
         return image
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         contentView.addSubview(cardimage)
-
+        
         configureContraints()
         func configureContraints() {
             NSLayoutConstraint.activate([
@@ -29,8 +29,7 @@ class CustomCellSecond: UICollectionViewCell {
                 cardimage.centerXAnchor.constraint(equalTo: centerXAnchor),
                 cardimage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                 cardimage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-                self.cardimage.heightAnchor.constraint(equalToConstant: 120),
-
+                cardimage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
             ])
         }
     }
@@ -38,8 +37,8 @@ class CustomCellSecond: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-
-    func config(model: CustomDataSecond) {
+    
+    func config(model: CustomDataLevel) {
         //buttonCell.setTitle(model.title, for: .normal)
         //buttonCell.backgroundColor = model.buttonColor
         cardimage.image = model.image

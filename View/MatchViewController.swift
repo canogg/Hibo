@@ -7,12 +7,12 @@
 
 import UIKit
 
-class ThirdViewController: UIViewController {
-    lazy var screen: ThirdView = ThirdView(frame: UIScreen.main.bounds)
-    let viewModel: SecondViewModel = SecondViewModel()
-
+class MatchViewController: UIViewController {
+    lazy var screen: MatchView = MatchView(frame: UIScreen.main.bounds)
+    let viewModel: ChoicesViewModel = ChoicesViewModel()
+    
     // custom init uiviewcontroller
-
+    
     override func loadView() {
         super.loadView()
         self.view = self.screen
@@ -24,7 +24,7 @@ class ThirdViewController: UIViewController {
         }
     }
     private func gpNextPage(title: String) {
-        let thirdViewController = ThirdViewController()
-        self.navigationController?.pushViewController(ThirdViewController(), animated: true)
+        // let thirdViewController = MatchViewController()
+        self.navigationController?.pushViewController(MatchViewController(), animated: true)
     }
 }

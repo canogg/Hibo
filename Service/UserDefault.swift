@@ -8,11 +8,11 @@
 import Foundation
 
 extension UserDefaults {
-
+    
     enum UserDefaultsKeys: String {
         case nameUser = "nameUser"
     }
-
+    
     func setPersonName(value: String){
         set(value, forKey: UserDefaultsKeys.nameUser.rawValue)
     }

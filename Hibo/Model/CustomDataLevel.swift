@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct CustomDataSecond {
+struct CustomDataLevel {
     var title: String
     var image: UIImage
 }

@@ -8,8 +8,14 @@
 import Foundation
 import UIKit
 
-struct CustomData {
+struct CustomDataIdioma {
     var title: String
     var image: UIImage
     var buttonColor: UIColor
+
+    init(title: String, image: UIImage, buttonColor: UIColor) {
+        self.title = title
+        self.image = image
+        self.buttonColor = buttonColor
+    }
 }
